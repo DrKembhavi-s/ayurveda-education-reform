@@ -1,0 +1,704 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ayurveda Education Reform Platform</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        header {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 20px 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 30px;
+            border-radius: 10px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #666;
+            font-size: 1.2em;
+            font-style: italic;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            margin: 30px 0;
+            flex-wrap: wrap;
+        }
+        
+        .tab-button {
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            padding: 15px 25px;
+            margin: 5px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+        }
+        
+        .tab-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .tab-button.active {
+            background: #2c3e50;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        h2 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            border-bottom: 3px solid #667eea;
+            padding-bottom: 10px;
+        }
+        
+        .forum-section {
+            margin-bottom: 30px;
+        }
+        
+        .post-form {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 16px;
+            transition: border-color 0.3s ease;
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+        
+        .btn {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .posts-container {
+            margin-top: 30px;
+        }
+        
+        .post-item {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #667eea;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        
+        .post-header {
+            display: flex;
+            justify-content: between;
+            align-items: center;
+            margin-bottom: 10px;
+            flex-wrap: wrap;
+        }
+        
+        .post-author {
+            font-weight: bold;
+            color: #2c3e50;
+        }
+        
+        .post-date {
+            color: #666;
+            font-size: 14px;
+        }
+        
+        .post-content {
+            line-height: 1.8;
+            margin-bottom: 15px;
+        }
+        
+        .post-category {
+            background: #667eea;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 15px;
+            font-size: 12px;
+            display: inline-block;
+        }
+        
+        .coalition-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+        
+        .coalition-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+        
+        .coalition-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .card-title {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .compliance-timeline {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        .timeline-item {
+            display: flex;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            border-left: 4px solid #28a745;
+        }
+        
+        .timeline-item.upcoming {
+            border-left-color: #ffc107;
+        }
+        
+        .timeline-item.overdue {
+            border-left-color: #dc3545;
+        }
+        
+        .timeline-date {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-right: 20px;
+            min-width: 120px;
+        }
+        
+        .proposal-builder {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 20px;
+        }
+        
+        .section-divider {
+            height: 2px;
+            background: linear-gradient(to right, #667eea, #764ba2);
+            margin: 30px 0;
+            border-radius: 2px;
+        }
+        
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            h1 {
+                font-size: 2em;
+            }
+            
+            .nav-tabs {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .tab-button {
+                margin: 5px 0;
+                width: 200px;
+            }
+            
+            .coalition-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .timeline-item {
+                flex-direction: column;
+            }
+            
+            .timeline-date {
+                margin-bottom: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🕉️ Ayurveda Education Reform Platform</h1>
+            <p class="subtitle">Reclaiming Our Sacred Purpose Through United Action</p>
+        </header>
+        
+        <div class="nav-tabs">
+            <button class="tab-button active" onclick="showTab('forums')">📢 Educator Forums</button>
+            <button class="tab-button" onclick="showTab('coalition')">🤝 Coalition Network</button>
+            <button class="tab-button" onclick="showTab('compliance')">📋 Compliance Tracker</button>
+            <button class="tab-button" onclick="showTab('proposals')">📝 Reform Proposals</button>
+        </div>
+        
+        <!-- Forums Tab -->
+        <div id="forums" class="tab-content active">
+            <h2>Educator Forums & Discussion Boards</h2>
+            <p><em>"Where the mind is without fear and the head is held high"</em> - Rabindranath Tagore</p>
+            
+            <div class="post-form">
+                <h3>Share Your Voice</h3>
+                <div class="form-group">
+                    <label>Post As:</label>
+                    <select id="anonymity">
+                        <option value="anonymous">Anonymous (Recommended for sensitive topics)</option>
+                        <option value="named">With my name</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Category:</label>
+                    <select id="category">
+                        <option value="regulatory">Regulatory Issues</option>
+                        <option value="teaching">Teaching Challenges</option>
+                        <option value="inspection">Inspection Experiences</option>
+                        <option value="solutions">Proposed Solutions</option>
+                        <option value="support">Need Support</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>Subject:</label>
+                    <input type="text" id="subject" placeholder="Brief description of your topic">
+                </div>
+                
+                <div class="form-group">
+                    <label>Your Message:</label>
+                    <textarea id="message" placeholder="Share your experiences, challenges, or ideas..."></textarea>
+                </div>
+                
+                <button class="btn" onclick="submitPost()">Post Message</button>
+            </div>
+            
+            <div class="posts-container" id="posts-container">
+                <!-- Sample posts will be added here -->
+            </div>
+        </div>
+        
+        <!-- Coalition Tab -->
+        <div id="coalition" class="tab-content">
+            <h2>Coalition Building Network</h2>
+            <p><em>"Unity is strength... when there is teamwork and collaboration, wonderful things can be achieved"</em> - Mattie Stepanek</p>
+            
+            <div class="coalition-grid">
+                <div class="coalition-card">
+                    <h3 class="card-title">🏥 Register Your Institution</h3>
+                    <p>Join the growing network of Ayurveda colleges committed to educational reform.</p>
+                    <div class="form-group">
+                        <input type="text" placeholder="Institution Name">
+                    </div>
+                    <div class="form-group">
+                        <input type="text" placeholder="Location (State)">
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Contact Email">
+                    </div>
+                    <button class="btn">Join Coalition</button>
+                </div>
+                
+                <div class="coalition-card">
+                    <h3 class="card-title">📊 Current Coalition</h3>
+                    <p><strong>Member Institutions:</strong> <span id="member-count">0</span></p>
+                    <p><strong>States Represented:</strong> <span id="states-count">0</span></p>
+                    <p><strong>Active Campaigns:</strong> <span id="campaigns-count">0</span></p>
+                    <button class="btn">View Member Directory</button>
+                </div>
+                
+                <div class="coalition-card">
+                    <h3 class="card-title">📢 Launch Campaign</h3>
+                    <p>Start a coordinated effort to address specific regulatory issues.</p>
+                    <div class="form-group">
+                        <input type="text" placeholder="Campaign Title">
+                    </div>
+                    <div class="form-group">
+                        <textarea placeholder="Campaign Description"></textarea>
+                    </div>
+                    <button class="btn">Create Campaign</button>
+                </div>
+                
+                <div class="coalition-card">
+                    <h3 class="card-title">📅 Upcoming Events</h3>
+                    <p>Coordinate meetings and strategic discussions.</p>
+                    <div style="margin: 15px 0;">
+                        <strong>Next Virtual Meeting:</strong><br>
+                        <span style="color: #666;">Date: To be scheduled</span>
+                    </div>
+                    <button class="btn">Schedule Meeting</button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Compliance Tab -->
+        <div id="compliance" class="tab-content">
+            <h2>Regulatory Compliance Tracker</h2>
+            <p><em>"Documentation without education is the bureaucracy of ignorance"</em></p>
+            
+            <div class="compliance-timeline">
+                <h3>Your Inspection Timeline</h3>
+                <div class="timeline-item">
+                    <div class="timeline-date">Jan 2025</div>
+                    <div>
+                        <strong>NCISM Annual Inspection</strong><br>
+                        Status: Completed ✅<br>
+                        Documents Required: 47 files, 320 pages
+                    </div>
+                </div>
+                
+                <div class="timeline-item upcoming">
+                    <div class="timeline-date">Mar 2025</div>
+                    <div>
+                        <strong>QCI Quality Assessment</strong><br>
+                        Status: Upcoming ⏰<br>
+                        Preparation Time: 45 days remaining
+                    </div>
+                </div>
+                
+                <div class="timeline-item upcoming">
+                    <div class="timeline-date">Jun 2025</div>
+                    <div>
+                        <strong>NAAC Accreditation Review</strong><br>
+                        Status: Scheduled ⏰<br>
+                        Documents Due: May 15, 2025
+                    </div>
+                </div>
+                
+                <div class="timeline-item upcoming">
+                    <div class="timeline-date">Sep 2025</div>
+                    <div>
+                        <strong>NABH Hospital Standards</strong><br>
+                        Status: Upcoming ⏰<br>
+                        Pre-assessment required
+                    </div>
+                </div>
+            </div>
+            
+            <div class="compliance-timeline">
+                <h3>Compliance Cost Calculator</h3>
+                <div class="form-group">
+                    <label>Average hours spent on inspection preparation per month:</label>
+                    <input type="number" id="hours" placeholder="e.g., 120">
+                </div>
+                <div class="form-group">
+                    <label>Number of staff involved in compliance:</label>
+                    <input type="number" id="staff" placeholder="e.g., 8">
+                </div>
+                <div class="form-group">
+                    <label>Average hourly cost per staff member:</label>
+                    <input type="number" id="cost" placeholder="e.g., 500">
+                </div>
+                <button class="btn" onclick="calculateComplianceCost()">Calculate Annual Cost</button>
+                <div id="cost-result" style="margin-top: 20px; font-size: 18px; font-weight: bold;"></div>
+            </div>
+        </div>
+        
+        <!-- Proposals Tab -->
+        <div id="proposals" class="tab-content">
+            <h2>Reform Proposal Generator</h2>
+            <p><em>"Be the change you wish to see in the world"</em> - Mahatma Gandhi</p>
+            
+            <div class="proposal-builder">
+                <h3>Create a Reform Proposal</h3>
+                
+                <div class="form-group">
+                    <label>Proposal Title:</label>
+                    <input type="text" id="proposal-title" placeholder="e.g., Streamlining NCISM Documentation Requirements">
+                </div>
+                
+                <div class="form-group">
+                    <label>Current Problem:</label>
+                    <textarea id="current-problem" placeholder="Describe the current issue in detail..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Proposed Solution:</label>
+                    <textarea id="proposed-solution" placeholder="Describe your proposed solution..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Expected Benefits:</label>
+                    <textarea id="expected-benefits" placeholder="List the benefits of implementing this proposal..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Supporting Data/Examples:</label>
+                    <textarea id="supporting-data" placeholder="Provide any data, statistics, or examples that support your proposal..."></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Implementation Timeline:</label>
+                    <textarea id="implementation" placeholder="Suggest a realistic timeline for implementation..."></textarea>
+                </div>
+                
+                <button class="btn" onclick="generateProposal()">Generate Formal Proposal</button>
+                
+                <div id="generated-proposal" style="display: none; margin-top: 30px; padding: 20px; background: #f8f9fa; border-radius: 10px;">
+                    <h3>Generated Proposal Document</h3>
+                    <div id="proposal-content"></div>
+                    <button class="btn" onclick="downloadProposal()">Download as PDF</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        // Sample data for demonstration
+        let posts = [
+            {
+                id: 1,
+                author: "Anonymous Educator",
+                date: "2025-01-15",
+                category: "regulatory",
+                subject: "NCISM Documentation Burden",
+                content: "We spent 200+ hours preparing for the last NCISM inspection, time that could have been used for actual teaching. The focus has shifted from education to documentation."
+            },
+            {
+                id: 2,
+                author: "Dr. Anonymous",
+                date: "2025-01-14",
+                category: "teaching",
+                subject: "Lost Passion for Teaching",
+                content: "After 15 years of teaching Ayurveda, I find myself more stressed about compliance than excited about sharing ancient wisdom. Our students deserve better."
+            }
+        ];
+        
+        let memberCount = 0;
+        let statesCount = 0;
+        let campaignsCount = 0;
+        
+        // Tab functionality
+        function showTab(tabName) {
+            // Hide all tabs
+            const tabs = document.querySelectorAll('.tab-content');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            
+            // Remove active class from buttons
+            const buttons = document.querySelectorAll('.tab-button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Show selected tab
+            document.getElementById(tabName).classList.add('active');
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+        }
+        
+        // Forum functionality
+        function submitPost() {
+            const subject = document.getElementById('subject').value;
+            const message = document.getElementById('message').value;
+            const category = document.getElementById('category').value;
+            const anonymity = document.getElementById('anonymity').value;
+            
+            if (!subject || !message) {
+                alert('Please fill in both subject and message fields.');
+                return;
+            }
+            
+            const newPost = {
+                id: posts.length + 1,
+                author: anonymity === 'anonymous' ? 'Anonymous Educator' : 'Registered User',
+                date: new Date().toISOString().split('T')[0],
+                category: category,
+                subject: subject,
+                content: message
+            };
+            
+            posts.unshift(newPost);
+            displayPosts();
+            
+            // Clear form
+            document.getElementById('subject').value = '';
+            document.getElementById('message').value = '';
+            
+            alert('Your post has been submitted successfully!');
+        }
+        
+        function displayPosts() {
+            const container = document.getElementById('posts-container');
+            container.innerHTML = '';
+            
+            posts.forEach(post => {
+                const postElement = document.createElement('div');
+                postElement.className = 'post-item';
+                postElement.innerHTML = `
+                    <div class="post-header">
+                        <span class="post-author">${post.author}</span>
+                        <span class="post-date">${post.date}</span>
+                    </div>
+                    <h4>${post.subject}</h4>
+                    <div class="post-content">${post.content}</div>
+                    <span class="post-category">${post.category}</span>
+                `;
+                container.appendChild(postElement);
+            });
+        }
+        
+        // Compliance cost calculator
+        function calculateComplianceCost() {
+            const hours = parseFloat(document.getElementById('hours').value) || 0;
+            const staff = parseFloat(document.getElementById('staff').value) || 0;
+            const cost = parseFloat(document.getElementById('cost').value) || 0;
+            
+            const monthlyComplianceCost = hours * staff * cost;
+            const annualComplianceCost = monthlyComplianceCost * 12;
+            
+            const resultDiv = document.getElementById('cost-result');
+            resultDiv.innerHTML = `
+                <div style="background: #fff3cd; padding: 15px; border-radius: 8px; border-left: 4px solid #ffc107;">
+                    <strong>Monthly Compliance Cost:</strong> ₹${monthlyComplianceCost.toLocaleString()}<br>
+                    <strong>Annual Compliance Cost:</strong> ₹${annualComplianceCost.toLocaleString()}<br>
+                    <small style="color: #856404;">This represents time and resources not spent on actual education</small>
+                </div>
+            `;
+        }
+        
+        // Proposal generator
+        function generateProposal() {
+            const title = document.getElementById('proposal-title').value;
+            const problem = document.getElementById('current-problem').value;
+            const solution = document.getElementById('proposed-solution').value;
+            const benefits = document.getElementById('expected-benefits').value;
+            const data = document.getElementById('supporting-data').value;
+            const implementation = document.getElementById('implementation').value;
+            
+            if (!title || !problem || !solution) {
+                alert('Please fill in at least the title, problem, and solution fields.');
+                return;
+            }
+            
+            const proposalContent = `
+                <div style="font-family: Arial, sans-serif; line-height: 1.6; color: #333;">
+                    <h2 style="color: #2c3e50; border-bottom: 2px solid #667eea; padding-bottom: 10px;">${title}</h2>
+                    
+                    <h3 style="color: #2c3e50; margin-top: 25px;">Current Problem Statement</h3>
+                    <p style="margin-bottom: 20px;">${problem}</p>
+                    
+                    <h3 style="color: #2c3e50; margin-top: 25px;">Proposed Solution</h3>
+                    <p style="margin-bottom: 20px;">${solution}</p>
+                    
+                    ${benefits ? `<h3 style="color: #2c3e50; margin-top: 25px;">Expected Benefits</h3><p style="margin-bottom: 20px;">${benefits}</p>` : ''}
+                    
+                    ${data ? `<h3 style="color: #2c3e50; margin-top: 25px;">Supporting Evidence</h3><p style="margin-bottom: 20px;">${data}</p>` : ''}
+                    
+                    ${implementation ? `<h3 style="color: #2c3e50; margin-top: 25px;">Implementation Timeline</h3><p style="margin-bottom: 20px;">${implementation}</p>` : ''}
+                    
+                    <div style="margin-top: 30px; padding: 15px; background: #e8f4fd; border-left: 4px solid #667eea;">
+                        <p style="margin: 0; font-style: italic;">"The ultimate measure of a man is not where he stands in moments of comfort and convenience, but where he stands at times of challenge and controversy." - Martin Luther King Jr.</p>
+                    </div>
+                    
+                    <p style="margin-top: 20px; text-align: right; color: #666;">
+                        Generated on: ${new Date().toLocaleDateString()}<br>
+                        Ayurveda Education Reform Platform
+                    </p>
+                </div>
+            `;
+            
+            document.getElementById('proposal-content').innerHTML = proposalContent;
+            document.getElementById('generated-proposal').style.display = 'block';
+        }
+        
+        function downloadProposal() {
+            alert('PDF download functionality will be implemented in the next phase. For now, you can copy and paste the generated proposal content.');
+        }
+        
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', function() {
+            displayPosts();
+            
+            // Update coalition stats (demo)
+            document.getElementById('member-count').textContent = '0';
+            document.getElementById('states-count').textContent = '0';  
+            document.getElementById('campaigns-count').textContent = '0';
+        });
+    </script>
+</body>
+</html>
